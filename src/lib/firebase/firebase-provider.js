@@ -1,4 +1,4 @@
-import { createContext, useMemo } from 'react';
+import { createContext } from 'react';
 import firebase from 'firebase/app';
 
 const FirebaseContext = createContext(undefined);

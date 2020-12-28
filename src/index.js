@@ -10,7 +10,7 @@ import {
   createMuiTheme,
 } from '@material-ui/core';
 
-import { FirebaseProvider } from './lib/firebase/firebase-provider';
+import { FirebaseProvider } from '@Lib/firebase';
 
 const theme = createMuiTheme({
   palette: {

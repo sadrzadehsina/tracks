@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { AccountLayout, DashboardLayout } from './layouts';
-import { SignIn } from './components/account';
-import { Tracks } from './components/dashboard';
+import { AccountLayout, DashboardLayout } from '@Layouts';
+import { SignIn } from '@Components/account';
+import { Tracks } from '@Components/dashboard';
 
 export default function App() {
   

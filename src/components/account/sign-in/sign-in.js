@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { useAuth } from '../../../lib/firebase/use-auth';
+import { useAuth } from '@Lib/firebase/use-auth';
 
 import { SignInView } from './view';
 

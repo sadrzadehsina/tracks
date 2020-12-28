@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { FirebaseContext } from './firebase-provider';
 
 import 'firebase/auth';
