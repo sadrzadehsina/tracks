@@ -14,7 +14,7 @@ import { FirebaseProvider } from './lib/firebase/firebase-provider';
 
 const theme = createMuiTheme({
   palette: {
-    type: 'dark',
+    type: 'light',
   },
 });
 

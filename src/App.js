@@ -13,29 +13,18 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
+import { useForm, Controller } from 'react-hook-form';
+
 import logo from './logo.svg';
 
-import { useFirestore } from './lib/firebase/use-firestore';
- 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import { useAuth } from './lib/firebase/use-auth';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '100vh',
   },
   image: {
-    // backgroundImage: 'url(https://source.unsplash.com/featured/1920x1080/?music)',
+    backgroundImage: 'url(https://source.unsplash.com/featured/1920x1080/?music)',
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
@@ -61,38 +50,58 @@ export default function SignInSide() {
   
   const classes = useStyles();
 
+  const { register, handleSubmit, control } = useForm();
+
+  const { signIn } = useAuth();
+
+  const doSignIn = state => {
+    signIn(state.email, state.password)
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
+  };
+
   return (
     <Grid container component="main" className={classes.root}>
       <Grid item xs={false} sm={4} md={9} className={classes.image} />
       <Grid item xs={12} sm={8} md={3} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <img src={logo} className="App-logo" alt="logo" width="50%" />
-          <form className={classes.form} noValidate>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
+          <form className={classes.form} noValidate onSubmit={handleSubmit(doSignIn)}>
+            <Controller 
               name="email"
-              autoComplete="email"
-              autoFocus
+              control={control}
+              defaultValue=""
+              render={
+                ({ onChange, value }) => 
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  label="Email Address"
+                  autoComplete="email"
+                  autoFocus
+                  onChange={onChange}
+                />
+              }
             />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
+            <Controller
               name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              control={control}
+              defaultValue=""
+              render={
+                ({ onChange, value }) => 
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  label="Password"
+                  type="password"
+                  autoComplete="current-password"
+                  onChange={onChange}
+                />
+              }
             />
             <Button
               type="submit"
@@ -115,9 +124,6 @@ export default function SignInSide() {
                 </Link>
               </Grid>
             </Grid>
-            <Box mt={5}>
-              <Copyright />
-            </Box>
           </form>
         </div>
       </Grid>
