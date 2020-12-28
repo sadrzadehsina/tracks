@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import firebase from 'firebase/app';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -13,6 +14,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
 import logo from './logo.svg';
+
+import { useFirestore } from './lib/firebase/use-firestore';
  
 function Copyright() {
   return (
@@ -32,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
   },
   image: {
-    backgroundImage: 'url(https://source.unsplash.com/featured/1920x1080/?music)',
+    // backgroundImage: 'url(https://source.unsplash.com/featured/1920x1080/?music)',
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
@@ -55,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignInSide() {
+  
   const classes = useStyles();
 
   return (
