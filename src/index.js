@@ -12,11 +12,17 @@ import {
 
 import { FirebaseProvider } from '@Lib/firebase';
 
+import { makeServer } from './server';
+
 const theme = createMuiTheme({
   palette: {
     type: 'light',
   },
 });
+
+if (process.env.NODE_ENV === 'development') {
+  makeServer({ environment: 'development' });
+}
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
