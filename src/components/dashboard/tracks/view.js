@@ -13,6 +13,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 import { useAudio } from '@Lib/audio';
 
@@ -20,14 +21,25 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     backgroundColor: theme.palette.background.paper,
-  },
+	},
+}));
+
+const progressStyle = makeStyles(theme => ({
+	buffer: {
+		height: '2px'
+	},
+	dashed: {
+		display: 'none'
+	}
 }));
 
 const Track = ({ track }) => {
 
 	const audioRef = createRef();
 
-	const { currentTime, duration, playing, play, pause } = useAudio({ audioRef });
+	const { currentTime, duration, playing, progress, buffer, play, pause } = useAudio({ audioRef });
+
+	const classes = progressStyle();
 
 	return (
 		<div>
@@ -53,6 +65,7 @@ const Track = ({ track }) => {
 					}
 				</ListItemSecondaryAction>
 			</ListItem>
+			{ playing && <LinearProgress variant="buffer" value={progress} valueBuffer={buffer} classes={classes} /> }
 		</div>
   );
 

@@ -1,10 +1,13 @@
-import { useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 const useAudio = ({ audioRef }) => {
 
 	const [duration, setDuration] = useState();
 	const [currentTime, setCurrentTime] = useState();
-	const [playing, setPlaying] = useState(false);
+  const [playing, setPlaying] = useState(false);
+  
+  const [progress, setProgress] = useState(0);
+  const [buffer, setBuffer] = useState(0);
 
 	useEffect(() => {
 
@@ -16,14 +19,31 @@ const useAudio = ({ audioRef }) => {
     const setAudioData = () => {
       setDuration(audio.duration);
       setCurrentTime(audio.currentTime);
-    }
+    };
 
-    const setAudioTime = () => setCurrentTime(audio.currentTime);
+    const setAudioProgress = () => {
+      var duration = audio.duration;
+      if (duration > 0) {
+        setProgress((audio.currentTime / duration) * 100);
+      }
+    };
+
+    const setAudioBuffer = () => {
+      const duration = audio.duration;
+      if (duration > 0) {
+        for (var i = 0; i < audio.buffered.length; i++) {
+          if ( audio.buffered.start(audio.buffered.length - 1 - i) < audio.currentTime ) {
+            setBuffer((audio.buffered.end(audio.buffered.length - 1 - i) / duration) * 100);
+            break;
+          }
+        }
+      }
+    };
 
     // DOM listeners: update React state on DOM events
     audio.addEventListener("loadeddata", setAudioData);
-
-    audio.addEventListener("timeupdate", setAudioTime);
+    audio.addEventListener("timeupdate", setAudioProgress);
+    audio.addEventListener("progress", setAudioBuffer);
 
     // React state listeners: update DOM on React state changes
     playing ? audio.play() : audio.pause();
@@ -31,13 +51,16 @@ const useAudio = ({ audioRef }) => {
     // effect cleanup
     return () => {
       audio.removeEventListener("loadeddata", setAudioData);
-      audio.removeEventListener("timeupdate", setAudioTime);
+      audio.removeEventListener("timeupdate", setAudioProgress);
+      audio.removeEventListener("progress", setAudioBuffer);
     }
   });
 
 	return {
 		currentTime,
-		duration,
+    duration,
+    progress,
+    buffer,
 		playing,
 		play: () => setPlaying(true),
 		pause: () => setPlaying(false),
