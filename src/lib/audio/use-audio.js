@@ -4,7 +4,12 @@ const useAudio = ({ audioRef }) => {
 
 	const [duration, setDuration] = useState();
 	const [currentTime, setCurrentTime] = useState();
-  const [playing, setPlaying] = useState(false);
+
+  const [status, setStatus] = useState({
+    playing: false,
+    paused: false,
+    stopped: false,
+  });
   
   const [progress, setProgress] = useState(0);
   const [buffer, setBuffer] = useState(0);
@@ -46,7 +51,12 @@ const useAudio = ({ audioRef }) => {
     audio.addEventListener("progress", setAudioBuffer);
 
     // React state listeners: update DOM on React state changes
-    playing ? audio.play() : audio.pause();
+    if (status.playing) audio.play();
+    else if (status.paused) audio.pause();
+    else if (status.stopped) {
+      audio.pause();
+      audio.currentTime = 0;
+    };
 
     // effect cleanup
     return () => {
@@ -57,13 +67,12 @@ const useAudio = ({ audioRef }) => {
   });
 
 	return {
-		currentTime,
-    duration,
     progress,
     buffer,
-		playing,
-		play: () => setPlaying(true),
-		pause: () => setPlaying(false),
+		status,
+		play: () => setStatus({ playing: true, paused: false, stopped: false }),
+		pause: () => setStatus({ playing: false, paused: true, stopped: false }),
+		stop: () => setStatus({ playing: false, paused: false, stopped: true }),
 	}
 
 };

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 import { FirebaseContext } from './firebase-provider';
 
 import 'firebase/auth';
@@ -7,7 +7,7 @@ const useAuth = () => {
 
 	const firebase = useContext(FirebaseContext);
 
-	const auth = firebase.auth();
+	const auth = useMemo(() => firebase.auth(), [firebase]);
 
 	const signUp = (email, password) => auth.createUserWithEmailAndPassword(email, password);
 
@@ -15,11 +15,12 @@ const useAuth = () => {
 
 	const resetPassword = (email) => auth.sendPasswordResetEmail(email);
 	
-	const updatePassword = password => auth.currentUser.updatePassword(password);
+	const updatePassword = (password) => auth.currentUser.updatePassword(password);
 	
 	const signOut = () => auth.signOut();
 
 	return {
+		currentUser: auth.currentUser,
 		signUp,
 		signIn,
 		resetPassword,

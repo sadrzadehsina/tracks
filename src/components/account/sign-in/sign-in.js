@@ -7,7 +7,7 @@ const SignIn = () => {
 
 	const { register, handleSubmit, control } = useForm();
 
-	const { signIn } = useAuth();
+	const { signIn, currentUser } = useAuth();
 
 	const doSignIn = ({ email, password }) =>
 		signIn(email, password)

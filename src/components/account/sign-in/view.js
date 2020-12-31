@@ -19,10 +19,10 @@ const SignInView = ({ form, signIn }) => {
 
 	const { register, handleSubmit, control } = form;
 	
-	const classes = useStyles();
+  const classes = useStyles();
 
   return (
-    <form className={classes.form} noValidate onSubmit={handleSubmit(signIn)}>
+    <form className={classes.form} noValidate onSubmit={handleSubmit((signIn))}>
       <Controller
         name="email"
         control={control}
