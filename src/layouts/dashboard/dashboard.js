@@ -24,7 +24,7 @@ const DashboardLayout = ({ children }) => {
 
   const doSignOut = () =>
     signOut()
-      .then(history.push('/account/login'))
+      .then(history.push('/account/signin'))
       .catch(console.log);
 
   return (
