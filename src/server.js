@@ -46,6 +46,11 @@ const makeServer = ({ environment }) => {
     routes() {
       this.namespace = "api";
 
+      this.passthrough('https://www.googleapis.com/**');
+      this.passthrough('https://securetoken.googleapis.com/**');
+      this.passthrough('https://play.google.com/**');
+      this.passthrough('https://accounts.google.com/**');
+
       this.get("/tracks", (schema) => schema.tracks.all());
     },
   });

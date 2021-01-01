@@ -19,7 +19,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Header = () => {
+const Header = ({ user, signOut }) => {
+
   const classes = useStyles();
 
   return (
@@ -27,7 +28,7 @@ const Header = () => {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>Tracks</Typography>
-          <Button color="inherit">Sign out</Button>
+          <Button color="inherit" onClick={signOut}>Sign out</Button>
         </Toolbar>
       </AppBar>
     </div>

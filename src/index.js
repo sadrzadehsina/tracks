@@ -37,7 +37,7 @@ ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <FirebaseProvider config={firebaseConfig} appName='tracks'>
+      <FirebaseProvider config={firebaseConfig} appName='tracks-web'>
         <App />
       </FirebaseProvider>
     </ThemeProvider>

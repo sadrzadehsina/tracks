@@ -7,20 +7,20 @@ const useAuth = () => {
 
 	const firebase = useContext(FirebaseContext);
 
-	const auth = useMemo(() => firebase.auth(), [firebase]);
+	const auth = firebase.auth;
 
-	const signUp = (email, password) => auth.createUserWithEmailAndPassword(email, password);
+	const signUp = (email, password) => auth().createUserWithEmailAndPassword(email, password);
 
-	const signIn = (email, password) => auth.signInWithEmailAndPassword(email, password);
+	const signIn = (email, password) => auth().signInWithEmailAndPassword(email, password);
 
-	const resetPassword = (email) => auth.sendPasswordResetEmail(email);
+	const resetPassword = (email) => auth().sendPasswordResetEmail(email);
 	
-	const updatePassword = (password) => auth.currentUser.updatePassword(password);
+	const updatePassword = (password) => auth().currentUser.updatePassword(password);
 	
-	const signOut = () => auth.signOut();
+	const signOut = () => auth().signOut();
 
 	return {
-		currentUser: auth.currentUser,
+		currentUser: () => auth().currentUser,
 		signUp,
 		signIn,
 		resetPassword,
