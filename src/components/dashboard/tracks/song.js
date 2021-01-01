@@ -26,10 +26,10 @@ const Song = ({ track }) => {
 
 	return (
 		<div>
-			<audio ref={audioRef}><source src={track.url} /></audio>
+			<audio ref={audioRef}><source src={track.previewURL} /></audio>
 			<ListItem>
 				<ListItemAvatar><Avatar><MusicNoteIcon /></Avatar></ListItemAvatar>
-				<Meta title={track.title} singer={track.singer} />
+				<Meta title={track.name} singer={track.artistName} />
 				<ListItemSecondaryAction>
 					{
 						status.playing ? (

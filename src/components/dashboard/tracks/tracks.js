@@ -17,7 +17,7 @@ const Tracks = () => {
 	useEffect(() => {
 
 		const fetchTracks = async() => {
-			const response = await axios.get('/api/tracks').then(response => response.data);
+			const response = await axios.get(`https://api.napster.com/v2.0/playlists/pp.214725454/tracks?apikey=${process.env.REACT_APP_NAPSTER_API_KEY}&limit=200`).then(response => response.data);
 			setTracks(response.tracks);
 		};
 
