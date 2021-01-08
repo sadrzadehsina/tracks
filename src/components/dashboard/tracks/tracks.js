@@ -9,11 +9,6 @@ const Tracks = () => {
 
 	const [tracks, setTracks] = useState([]);
 
-	const doSignOut = () => 
-		signOut()
-			.then(console.log.bind('success'))
-			.catch(console.log('error'));
-
 	useEffect(() => {
 
 		const fetchTracks = async() => {
@@ -25,7 +20,7 @@ const Tracks = () => {
 
 	}, []);
 
-	return <TracksView tracks={tracks} signOut={doSignOut} />;
+	return <TracksView tracks={tracks} />;
 
 };
 
