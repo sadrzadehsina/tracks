@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { AccountLayout, DashboardLayout } from '@Layouts';
 import { SignIn } from '@Components/account';
 import { Tracks } from '@Components/dashboard';
@@ -9,21 +9,23 @@ export default function App() {
     <Router>
       <Switch>
 
-        <Route path="/account/:path?" exact>
+        <Route path="/tracks/account/:path?" exact>
           <AccountLayout>
             <Switch>
-              <Route path="/account/signin" component={SignIn} />
+              <Route path="/tracks/account/signin" component={SignIn} />
             </Switch>
           </AccountLayout>
         </Route>
 
-        <Route path="/dashboard/:path?" exact>
+        <Route path="/tracks/dashboard/:path?" exact>
           <DashboardLayout>
             <Switch>
-              <Route path="/dashboard/tracks" component={Tracks} />
+              <Route path="/tracks/dashboard/tracks" component={Tracks} />
             </Switch>
           </DashboardLayout>
         </Route>
+
+        <Redirect to="/tracks/account/signin" />
 
       </Switch>
     </Router>
