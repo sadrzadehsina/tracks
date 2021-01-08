@@ -29,7 +29,7 @@ const DashboardLayout = ({ children }) => {
     signOut()
       .then(() => {
         toast.show({ message: 'You have successfully signed out!' });
-        history.push('/account/signin');
+        history.push('/tracks/account/signin');
       })
       .catch(error => toast.show({ message: error.message, type: 'error' }));
 

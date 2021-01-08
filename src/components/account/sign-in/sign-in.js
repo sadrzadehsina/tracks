@@ -18,7 +18,7 @@ const SignIn = () => {
 
 	const doSignIn = ({ email, password }) => 
 		signIn(email, password)
-			.then(() => history.push('/dashboard/tracks'))
+			.then(() => history.push('/tracks/dashboard/tracks'))
 			.catch(error => toast.show({ message: error.message, type: 'error' }));
 
 	return (
