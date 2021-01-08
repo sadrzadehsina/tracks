@@ -2,6 +2,7 @@
   "name": "tracks",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://sadrzadehsina.github.io/tracks",
   "dependencies": {
     "@craco/craco": "^6.0.0",
     "@material-ui/core": "^4.11.2",
