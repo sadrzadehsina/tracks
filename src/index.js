@@ -11,6 +11,7 @@ import {
   createMuiTheme,
 } from '@material-ui/core';
 
+import { ToastsProvider } from '@Lib/toasts';
 import { FirebaseProvider } from '@Lib/firebase';
 
 // import { makeServer } from './server';
@@ -59,9 +60,11 @@ ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <FirebaseProvider config={firebaseConfig} appName='tracks-web'>
-        <App />
-      </FirebaseProvider>
+      <ToastsProvider>
+        <FirebaseProvider config={firebaseConfig} appName='tracks-web'>
+          <App />
+        </FirebaseProvider>
+      </ToastsProvider>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
