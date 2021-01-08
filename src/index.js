@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import WebFont from 'webfontloader';
 
 import { ThemeProvider } from '@material-ui/styles';
 
@@ -18,11 +19,32 @@ const theme = createMuiTheme({
   palette: {
     type: 'light',
   },
+  typography: {
+    fontFamily: [
+      'Titillium Web',
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+  },
 });
 
 // if (process.env.NODE_ENV === 'development') {
 //   makeServer({ environment: 'development' });
 // }
+
+WebFont.load({
+  google: {
+    families: ['Titillium Web']
+  }
+});
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,

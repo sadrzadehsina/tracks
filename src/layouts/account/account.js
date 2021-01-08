@@ -2,7 +2,7 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core";
 
-import logo from '../../logo.svg';
+import logo from '../../logo.png';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -33,7 +33,7 @@ const AccountLayout = ({ children }) => {
       <Grid item xs={false} sm={4} md={9} className={classes.image} />
       <Grid item xs={12} sm={8} md={3} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          <img src={logo} className="App-logo" alt="logo" width="50%" />
+          <img src={logo} className="App-logo" alt="logo" width="20%" />
           {children}
         </div>
       </Grid>

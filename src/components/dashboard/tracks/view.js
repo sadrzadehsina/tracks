@@ -18,7 +18,7 @@ const TracksView = ({ tracks }) => {
   return (
     <div className={classes.root}>
       <List component="nav" aria-label="main tracks">
-				{ tracks.map((track, index) => <Song track={track} key={track.id} />) }
+        { tracks.map((track, index) => <Song track={track} key={track.id} />) }
       </List>
     </div>
   );
